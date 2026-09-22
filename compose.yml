@@ -1,0 +1,26 @@
+services:
+  app:
+    build: .
+    ports: ["${APP_PORT:-8000}:80"]
+    volumes: [".:/app"]
+    environment:
+      # FrankenPHP écoute en HTTP simple sur le port 80 (pas de TLS en local)
+      SERVER_NAME: ":80"
+    depends_on:
+      database:
+        condition: service_healthy
+
+  database:
+    image: mysql:8.4
+    environment:
+      MYSQL_DATABASE: app
+      MYSQL_ROOT_PASSWORD: root
+    volumes: ["db-data:/var/lib/mysql"]
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-proot"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+volumes:
+  db-data:
