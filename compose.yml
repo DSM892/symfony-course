@@ -1,8 +1,10 @@
 services:
   app:
     build: .
-    ports: ["${APP_PORT:-8000}:80"]
-    volumes: [".:/app"]
+    ports: ["${APP_PORT:-8080}:80"]
+    volumes:
+      - .:/app
+      - app-var:/app/var
     environment:
       # FrankenPHP écoute en HTTP simple sur le port 80 (pas de TLS en local)
       SERVER_NAME: ":80"
@@ -24,3 +26,4 @@ services:
 
 volumes:
   db-data:
+  app-var:
