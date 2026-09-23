@@ -17,7 +17,7 @@ final class HomeController extends AbstractController
         ]);
     }
     
-    #[Route('/a-propos', name: 'app_a-propos')]
+    #[Route('/a-propos', name: 'a_propos')]
     public function aPropos(): Response
     {
         return $this->render('home/a-propos.html.twig', [
@@ -25,7 +25,7 @@ final class HomeController extends AbstractController
         ]);
     }
 
-    #[Route('/api/ping', name: 'app_api/ping')]
+    #[Route('/api/ping', name: 'api/ping')]
     public function apiPing()
         {
             $data = ['message' => 'Hello, World!'];
