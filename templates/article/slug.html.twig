@@ -3,5 +3,5 @@
 {% block title %} {{ title }} {% endblock %}
 
 {% block body %}
-<h1>Article n°{{ article_id }}</h1>
+<h1>{{ article_slug|slug }}</h1>
 {% endblock %}
