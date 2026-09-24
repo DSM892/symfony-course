@@ -7,6 +7,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Article
 {
     #[ORM\Id]
@@ -79,9 +80,9 @@ class Article
         return $this;
     }
 
-    @ORM\PrePersist
+    #[ORM\PrePersist]
     public function initCreatedAt(): void
     {
-        $this->setCreatedAt(new \DateTime('now'));
+        $createdAt = new \DateTime('now');
     }
 }

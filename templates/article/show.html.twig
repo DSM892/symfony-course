@@ -3,5 +3,13 @@
 {% block title %} {{ title }} {% endblock %}
 
 {% block body %}
-<h1>Article n°{{ article_id }}</h1>
+{% if article.id %}
+    <p>
+    Article n°{{ article.id }}<br>
+    Titre : {{ article.titre }}<br>
+    Contenu : {{ article.contenu }}<br>
+    </p>
+{% else %}
+    
+{% endif %}
 {% endblock %}

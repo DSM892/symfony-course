@@ -41,4 +41,7 @@ cc: ## Vide le cache Symfony
 console: ## Lance une commande Symfony : make console c="debug:router"
 	$(EXE) php bin/console $(c)
 
+composer:
+	$(EXE) composer $(c)
+
 .PHONY: help build up down reset logs sh install migrate fixtures cc console

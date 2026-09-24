@@ -7,17 +7,28 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Requirement\Requirement;
+use App\Entity\Article;
+use App\Repository\ArticleRepository;
 
 #[Route('/article', name: 'article_')]
 
 final class ArticleController extends AbstractController
 {
+    #[Route('/list', name: 'list')]
+    public function articleList(ArticleRepository $articleRepository): Response
+    {
+        return $this->render('article/list.html.twig', [
+            'title' => 'Article List',
+            'article_list' => $articleRepository->findBy(array(), array('createdAt' => 'DESC')),
+        ]);
+    }
+
     #[Route('/{id}', name: 'id', requirements: ['id' => Requirement::DIGITS])]
-    public function articleId(int $id): Response
+    public function articleId(Article $article): Response
     {
         return $this->render('article/show.html.twig', [
             'title' => 'Article ID',
-            'article_id' => $id,
+            'article' => $article,
         ]);
     }
 
